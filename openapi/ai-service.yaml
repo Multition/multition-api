@@ -1,0 +1,46 @@
+openapi: 3.1.0
+info:
+  title: Multition AI Service
+  version: 0.1.0
+  description: Initial technical contract for the Multition AI service scaffold.
+  license:
+    name: Private course project
+    identifier: LicenseRef-Proprietary
+servers:
+  - url: http://localhost:8000
+    description: Local development
+tags:
+  - name: System
+    description: Service health and operational endpoints.
+paths:
+  /health:
+    get:
+      tags: [System]
+      operationId: getAiHealth
+      summary: Check AI service health
+      security: []
+      responses:
+        "200":
+          description: Service is available.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AiHealth"
+components:
+  schemas:
+    AiHealth:
+      type: object
+      required: [status, service, version, environment, timestamp]
+      properties:
+        status:
+          type: string
+          const: ok
+        service:
+          type: string
+        version:
+          type: string
+        environment:
+          type: string
+        timestamp:
+          type: string
+          format: date-time

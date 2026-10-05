@@ -1,0 +1,44 @@
+openapi: 3.1.0
+info:
+  title: Multition Core API
+  version: 0.1.0
+  description: Initial technical contract for the Multition Core API scaffold.
+  license:
+    name: Private course project
+    identifier: LicenseRef-Proprietary
+servers:
+  - url: http://localhost:4000
+    description: Local development
+tags:
+  - name: System
+    description: Service health and operational endpoints.
+paths:
+  /health:
+    get:
+      tags: [System]
+      operationId: getHealth
+      summary: Check Core API health
+      security: []
+      responses:
+        "200":
+          description: Service is available.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Health"
+components:
+  schemas:
+    Health:
+      type: object
+      required: [status, service, version, timestamp]
+      properties:
+        status:
+          type: string
+          const: ok
+        service:
+          type: string
+        version:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
